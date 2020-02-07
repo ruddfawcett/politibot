@@ -93,6 +93,7 @@ def gen_text(prefix):
     prepend = f'<|startoftext|>{prefix}'
     text = prepend
 
+    # Heavily influenced by https://github.com/minimaxir/reddit-gpt-2-cloud-run/blob/master/app.py.
     while '<|endoftext|>' not in text and length <= MAX_LENGTH:
         text = gpt2.generate(sess,
                              length=STEP_LENGTH,
