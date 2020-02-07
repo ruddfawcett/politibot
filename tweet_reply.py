@@ -180,11 +180,11 @@ def reply(text, handle, status_id):
     else:
         return
 
-    tweet_len = 280 - (len(handle) + 1)
+    tweet_len = 280 - (len(handle) + 4) # + 4 = for space before handle id (1) and elipses(3)
 
-    trimmed = (response[:tweet_len] + '..') if len(response) > tweet_len else response
+    trimmed = (response[:tweet_len] + '...') if len(response) > tweet_len else response
 
-    api.update_status(status=trimmed, in_reply_to_status_id=status_id , auto_populate_reply_metadata=True)
+    api.update_status(status=trimmed, in_reply_to_status_id=status_id, auto_populate_reply_metadata=True)
 
     print('{:=<65}\n'.format('==== PARSED TWEET, DETAILS BELOW: '))
     print('{:-<65} {}'.format('Tweet ', orig))
