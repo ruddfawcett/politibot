@@ -184,19 +184,22 @@ def reply(text, handle, status_id):
 
     trimmed = (response[:tweet_len] + '...') if len(response) > tweet_len else response
 
-    api.update_status(status=trimmed, in_reply_to_status_id=status_id, auto_populate_reply_metadata=True)
+    try:
+        api.update_status(status=trimmed, in_reply_to_status_id=status_id, auto_populate_reply_metadata=True)
 
-    print('{:=<65}\n'.format('==== PARSED TWEET, DETAILS BELOW: '))
-    print('{:-<65} {}'.format('Tweet ', orig))
-    print('{:-<65} {}'.format('Tweet ID ', status_id))
-    print('{:-<65} {}'.format('Tweet Compound Sentiment ', compound))
-    print('{:-<65} {}\n'.format('Agree with Tweet?', 'YES' if agree else 'NO'))
+        print('{:=<65}\n'.format('==== PARSED TWEET, DETAILS BELOW: '))
+        print('{:-<65} {}'.format('Tweet ', orig))
+        print('{:-<65} {}'.format('Tweet ID ', status_id))
+        print('{:-<65} {}'.format('Tweet Compound Sentiment ', compound))
+        print('{:-<65} {}\n'.format('Agree with Tweet?', 'YES' if agree else 'NO'))
 
-    print('{:=<65}\n'.format('==== TWEETED RESPONSE, DETAILS BELOW: '))
-    print('{:-<65} {}'.format('Response Body ', trimmed))
-    print('{:-<65} {}\n'.format('Response Sentiment ', analyzer.polarity_scores(trimmed)['compound']))
-    print('{:=<65} {:%Y-%b-%d %H:%M:%S}'.format('==== Response Time ', datetime.datetime.now()))
-    print('\n\n')
+        print('{:=<65}\n'.format('==== TWEETED RESPONSE, DETAILS BELOW: '))
+        print('{:-<65} {}'.format('Response Body ', trimmed))
+        print('{:-<65} {}\n'.format('Response Sentiment ', analyzer.polarity_scores(trimmed)['compound']))
+        print('{:=<65} {:%Y-%b-%d %H:%M:%S}'.format('==== Response Time ', datetime.datetime.now()))
+        print('\n\n')
+    except tweepy.TweepError as e:
+        print(e)
 
 def reply_to_tweets(handle):
     tweets = tweepy.Cursor(api.user_timeline, id=handle, tweet_mode='extended').items()
