@@ -1,0 +1,7 @@
+argparse==1.4.0
+botometer==1.4
+gpt-2-simple==0.7.1
+pandas==1.0.0
+PyYAML==5.3
+tweepy==3.8.0
+vaderSentiment==3.2.1
