@@ -145,7 +145,7 @@ def gen_response(subject, type, agree=True):
             prefix = gen_prefix(subject, type, agree=agree, extended_prefix=True)
             text = gen_text(prefix)
             compound = analyzer.polarity_scores(text)['compound']
-            print(f'Generated text: {text}...\n Compound score: {compound}...')
+            print(f'Generated text: {text}...\nCompound score: {compound}...')
 
     else:
         while compound >= -SENTIMEMT_THRESHOLD:
@@ -153,7 +153,7 @@ def gen_response(subject, type, agree=True):
             prefix = gen_prefix(subject, type, agree=agree, extended_prefix=True)
             text = gen_text(prefix)
             compound = analyzer.polarity_scores(text)['compound']
-            print(f'Generated text: {text}...\n Compound score: {compound}...')
+            print(f'Generated text: {text}...\nCompound score: {compound}...')
 
     return text
 
