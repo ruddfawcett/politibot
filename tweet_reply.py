@@ -138,6 +138,7 @@ def gen_response(subject, type, agree=True):
     text = gen_text(prefix)
     analyzer = SentimentIntensityAnalyzer()
     compound = analyzer.polarity_scores(text)['compound']
+    print(f'Generated text: {text}...\nCompound score: {compound}...')
 
     if type == SUPPORT:
         while compound <= SENTIMEMT_THRESHOLD:
